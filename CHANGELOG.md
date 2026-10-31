@@ -6,7 +6,11 @@ All notable changes to nanoMuse. The format follows [Keep a Changelog](https://k
 
 ### Cloud
 
+- **The local self-hosting script printed a working command for sign-in codes.** Its hint now enters `cloud/` before reading the relay logs, so it can be copied from the repository root. ([#716](https://github.com/nano-muse/nanoMuse/pull/716))
+
 ### Runtime
+
+- **The Docker web app could use a different host port.** Set `NANOMUSE_RUNTIME_PORT` when port 8787 is occupied, including when a local relay shares the host. The default and the container port remain 8787. ([#717](https://github.com/nano-muse/nanoMuse/pull/717))
 
 ### Web
 
@@ -23,7 +27,11 @@ All notable changes to nanoMuse. The format follows [Keep a Changelog](https://k
 
 ### iOS
 
+- **Kept System Auto reply speech on the chosen language-specific voice.** An inactive concrete voice later in the Voice Output group no longer overrides Auto. A concrete System voice explicitly selected for Voice Output still takes priority. For [#722](https://github.com/nano-muse/nanoMuse/issues/722).
+
 ### Project
+
+- **GUI regression gained 20 fixed simulated tasks and independent state checks.** Reference mode ran offline in CI, an opt-in runner used a configured model, and a standalone recorder reported model calls, latency and available token usage. The cases also corrected loop detection for identical click coordinates on different pages. [GUI regression](docs/gui-regression.md).
 
 - **The docs say which approval cards reach the phone:** only those of a scheduled task running on nanoMuse Desktop. A card of a chat somebody is typing in, on the desktop or in the web console, stays where it was asked, and the Python runtime does not push yet; the hub page, the troubleshooting page and the desktop page say so. ([#704](https://github.com/nano-muse/nanoMuse/issues/704))
 
@@ -164,6 +172,7 @@ Crew: four days after Logbook, a fifth look at the whole project with the sevent
 - **A slow answer through nanoMuse Cloud is waited for, up to 300 seconds.** The app gave a stream up after 120 seconds without an event and sent the turn again from the start; through the relay, which holds a request while the model is busy and gives the provider up itself after 180 seconds, that cut off the slow turns and put them at the back of the queue again (over the last week, half of the iPhone's abandoned calls ended at exactly 120 seconds). The relay's streams get 300 seconds now, as on the desktop; a provider of your own keeps the app's 120.
 
 ### Project
+
 
 - An *iOS · Beta group* workflow hands a TestFlight build to the external group *nanoMuse Beta* and submits it for Apple's beta review (*Run workflow* with the build number and a note), so the public link gets a version without a sign-in to App Store Connect.
 - The harness bundle workflow builds a branch once, through its pull request (and main and the release tags as before); a push to a branch with a pull request open ran the Linux and Windows jobs twice.
